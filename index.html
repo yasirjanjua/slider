@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet" >
+	
+<body>
+
+	<div class="cotainer row">
+		<div class="c-slider-cotainer" id="c-slider-cotainer">
+			<ul>
+				<li class="activeSlider" data-upperPosition="1">
+					<ul>
+						<li class="activePage"><div class="imagesHolder" data-position="1" style="background-color:#ab529e;"><h4>A-1</h4></div></li>
+						<li><div class="imagesHolder" data-position="2" style="background-color:#f08080;"><h4>A-2</h4></div></li>
+						<li><div class="imagesHolder" data-position="3" style="background-color:#66cccc;"><h4>A-3</h4></div></li>
+					</ul>
+				</li>
+				<li data-upperPosition="2">
+					<ul>
+						<li><div class="imagesHolder" style="background-color:#660066;"><h4>B-1</h4></div></li>
+						<li><div class="imagesHolder" style="background-color:#552299;"><h4>B-2</h4></div></li>
+					</ul>
+				</li>
+				<li data-upperPosition="3">
+					<ul>
+						<li><div class="imagesHolder" style="background-color:#ace572;"><h4>c-1</h4></div></li>
+						<li><div class="imagesHolder" style="background-color:#899ec1;"><h4>c-2</h4></div></li>
+						<li><div class="imagesHolder" style="background-color:#487de4;"><h4>c-3</h4></div></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="row" style="margin-left: 10px; margin-top: 60px;">
+		<div class="col-xs-6">
+			<label for="c-slider-pre-position" class="c-slider-pre-position">Pre</label>
+			<input type="text" value="0" id="c-slider-pre-position"><br>
+			<label for="c-slider-cur-position" class="c-slider-cur-position">Current</label>
+			<input type="text" value="1" id="c-slider-cur-position"><br>
+			<label for="c-slider-post-position" class="c-slider-post-position">Post</label>
+			<input type="text" value="2" id="c-slider-post-position"><br>
+			<label for="c-slider-total-sliders" class="c-slider-total-sliders">Total</label>
+			<input type="text"  id="c-slider-total-sliders"><br>
+		</div>
+		<div class="col-xs-6">
+			<label for="c-scroll-left-position" class="c-scroll-left-position">Left</label>
+			<input type="text" value="0" id="c-scroll-left-position"><br>
+			<label for="c-scroll-cur-position" class="c-scroll-cur-position">Current</label>
+			<input type="text" value="1" id="c-scroll-cur-position"><br>
+			<label for="c-scroll-right-position" class="c-scroll-right-position">Right</label>
+			<input type="text" value="2" id="c-scroll-right-position"><br>
+			<label for="c-scroll-total-scrolls" class="c-scroll-total-scrolls">Total</label>
+			<input type="text" value="3"  id="c-scroll-total-scrolls"><br>
+		</div>
+		<div class="testingbuttons">
+			<a href="javascript:;" id="slider-button-down"> Down </a>
+			<a href="javascript:;" id="slider-button-up"> Up </a>
+			<a href="javascript:;" id="slider-button-left"> Left </a>
+			<a href="javascript:;" id="slider-button-right"> Right </a>
+		</div>
+	</div>
+	
+
+	
+
+	<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+  <script>
+  $(function(){
+
+  	var setVerCount = function(){
+  		var countVer = $("#c-slider-cotainer > ul > li").length;
+  		
+  		$("#c-slider-total-sliders").val(countVer);
+
+  		$("#c-slider-cotainer > ul > li.activeSlider > ul > li").each(function( index  ) {
+		var x = $(this).find('div').data('position');	
+		$(this).find('div').add().css("z-index" , (99878) - parseInt(x));
+		});
+
+  	}
+  
+  		setVerCount();
+  	
+	
+	$("#slider-button-down").click(function (){
+		console.log("Printing Down button");
+
+		
+		$("#c-slider-cotainer > ul> li.activeSlider").prev().addClass("activeSlider");
+		$("#c-slider-cotainer > ul li.activeSlider").next().removeClass("activeSlider");
+
+		setVerCount();
+
+		var totalSliders = parseInt($("#c-slider-total-sliders").val());
+		var cur = parseInt($("#c-slider-cur-position").val());
+		var pre = parseInt($("#c-slider-pre-position").val());
+		var post = parseInt($("#c-slider-post-position").val());
+		
+		if(cur < totalSliders){
+			$("#c-slider-pre-position").val($("#c-slider-cur-position").val());
+			$("#c-slider-post-position").val(post + 1 );
+			$("#c-slider-cur-position").val(cur + 1 );
+		}
+		
+	});
+
+	
+	
+	$("#slider-button-up").click(function (){
+		console.log("Printing Up button");
+
+
+
+		$("#c-slider-cotainer > ul> li.activeSlider").next().addClass("activeSlider");
+		$("#c-slider-cotainer > ul li.activeSlider").prev().removeClass("activeSlider");
+		$(".activeSlider>ul>li").first().addClass("activePage");
+		setVerCount();
+
+		var totalSliders = parseInt($("#c-slider-total-sliders").val());
+		var cur = parseInt($("#c-slider-cur-position").val());
+		var pre = parseInt($("#c-slider-pre-position").val());
+		var post = parseInt($("#c-slider-post-position").val());
+		if(pre > 0 ){
+			$("#c-slider-post-position").val($("#c-slider-cur-position").val() );
+			$("#c-slider-cur-position").val(cur - 1);
+			$("#c-slider-pre-position").val(cur - 2);
+		}
+	});
+
+	var setHorCount = function(){
+		var countHor = $(".activeSlider>ul>li").length;
+
+  		$("#c-scroll-total-scrolls").val(countHor);
+
+	}
+
+  	$("#slider-button-left").click(function(){
+  		console.log("Printing Left button");
+
+  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage");
+  		$("li.activeSlider > ul > .activePage").next().removeClass("activePage");
+  		
+		
+  		setHorCount();
+  		
+
+  		var totalSliders = parseInt($("#c-scroll-total-scrolls").val());
+		var cur = parseInt($("#c-scroll-cur-position").val());
+		var left = parseInt($("#c-scroll-left-position").val());
+		var right = parseInt($("#c-scroll-right-position").val());
+
+		if(cur < totalSliders){
+			$("#c-scroll-left-position").val($("#c-scroll-cur-position").val());
+			$("#c-scroll-right-position").val(right + 1 );
+			$("#c-scroll-cur-position").val(cur + 1 );
+			
+			$(".activeSlider > ul > li").each(function( index  ) {
+				var x = $(this).find('div').data('position');	
+				$(this).find('div').add().css("z-index" , (19878) - parseInt(x));
+			});
+		}
+  	});	
+
+  	$("#slider-button-right").click(function (){
+		console.log("Printing right button");
+
+		$("li.activeSlider > ul > .activePage ").next().addClass("activePage");
+		$("li.activeSlider > ul > .activePage").prev().removeClass("activePage");
+		
+		setHorCount();
+		
+
+		var totalSliders = parseInt($("#c-scroll-total-scrolls").val());
+		var cur = parseInt($("#c-scroll-cur-position").val());
+		var left = parseInt($("#c-scroll-left-position").val());
+		var right = parseInt($("#c-scroll-right-position").val());
+
+
+		if(left > 0 ){
+			$("#c-scroll-right-position").val($("#c-scroll-cur-position").val() );
+			$("#c-scroll-cur-position").val(cur - 1);
+			$("#c-scroll-left-position").val(cur - 2);
+
+			$(".activeSlider > ul > li").each(function( index  ) {
+				var x = $(this).find('div').data('position');	
+				$(this).find('div').add().css("z-index" , (19878) - parseInt(x));
+			});
+		}
+	});
+
+  });
+
+  </script>
+  
+</body>
+</html>
