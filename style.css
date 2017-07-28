@@ -8,7 +8,7 @@
 }
 .c-slider-cotainer li{
     list-style: none;
-    transition: all 0.5s ease-in;
+   /* transition: all 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);*/
 }
 .c-slider-cotainer > ul{
     width: 300px;
@@ -62,4 +62,5 @@
 
 .activePage{
     z-index: 255555;
+    
 }

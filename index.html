@@ -4,7 +4,8 @@
 </head>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="style.css" rel="stylesheet" >
-	
+	 <link rel="stylesheet"
+ 	 href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 <body>
 
 	<div class="cotainer row">
@@ -94,8 +95,8 @@
 		console.log("Printing Down button");
 
 		
-		$("#c-slider-cotainer > ul> li.activeSlider").prev().addClass("activeSlider");
-		$("#c-slider-cotainer > ul li.activeSlider").next().removeClass("activeSlider");
+		$("#c-slider-cotainer > ul> li.activeSlider").prev().addClass("activeSlider animated slideInDown");
+		$("#c-slider-cotainer > ul li.activeSlider").next().removeClass("activeSlider animated slideInDown slideInUp");
 
 		setVerCount();
 
@@ -119,8 +120,8 @@
 
 
 
-		$("#c-slider-cotainer > ul> li.activeSlider").next().addClass("activeSlider");
-		$("#c-slider-cotainer > ul li.activeSlider").prev().removeClass("activeSlider");
+		$("#c-slider-cotainer > ul> li.activeSlider").next().addClass("activeSlider animated slideInUp");
+		$("#c-slider-cotainer > ul li.activeSlider").prev().removeClass("activeSlider animated slideInDown slideInUp");
 		$(".activeSlider>ul>li").first().addClass("activePage");
 		setVerCount();
 
@@ -145,8 +146,8 @@
   	$("#slider-button-left").click(function(){
   		console.log("Printing Left button");
 
-  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage");
-  		$("li.activeSlider > ul > .activePage").next().removeClass("activePage");
+  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage animated slideInRight");
+  		$("li.activeSlider > ul > .activePage").next().removeClass("animated slideInRight slideInLeft activePage");
   		
 		
   		setHorCount();
@@ -172,8 +173,8 @@
   	$("#slider-button-right").click(function (){
 		console.log("Printing right button");
 
-		$("li.activeSlider > ul > .activePage ").next().addClass("activePage");
-		$("li.activeSlider > ul > .activePage").prev().removeClass("activePage");
+		$("li.activeSlider > ul > .activePage ").next().addClass("activePage animated slideInLeft");
+		$("li.activeSlider > ul > .activePage").prev().removeClass("animated slideInLeft slideInRight activePage");
 		
 		setHorCount();
 		
