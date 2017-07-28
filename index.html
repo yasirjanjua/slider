@@ -146,8 +146,10 @@
   	$("#slider-button-left").click(function(){
   		console.log("Printing Left button");
 
-  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage animated slideInRight");
-  		$("li.activeSlider > ul > .activePage").next().removeClass("animated slideInRight slideInLeft activePage");
+  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage animated fadeIn");
+  		$("li.activeSlider > ul > .activePage").next().removeClass("activePage animated fadeIn");
+  		$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
+  		$("li.activeSlider > ul > .activePage").next().addClass("animated slideOutLeft");
   		
 		
   		setHorCount();
@@ -173,8 +175,10 @@
   	$("#slider-button-right").click(function (){
 		console.log("Printing right button");
 
-		$("li.activeSlider > ul > .activePage ").next().addClass("activePage animated slideInLeft");
-		$("li.activeSlider > ul > .activePage").prev().removeClass("animated slideInLeft slideInRight activePage");
+		$("li.activeSlider > ul > .activePage ").next().addClass("activePage animated fadeIn");
+		$("li.activeSlider > ul > .activePage").prev().removeClass("activePage animated fadeIn");
+		$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
+		$("li.activeSlider > ul > .activePage").prev().addClass("animated slideOutRight");
 		
 		setHorCount();
 		
