@@ -62,9 +62,6 @@
 			<a href="javascript:;" id="slider-button-right"> Right </a>
 		</div>
 	</div>
-	
-
-	
 
 	<script
   src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -75,9 +72,12 @@
   
   <script>
   $(function(){
+  	var countVer;
+  	var countHor;
 
   	var setVerCount = function(){
-  		var countVer = $("#c-slider-cotainer > ul > li").length;
+  		countVer = $("#c-slider-cotainer > ul > li").length;
+  		
   		
   		$("#c-slider-total-sliders").val(countVer);
 
@@ -87,17 +87,28 @@
 		});
 
   	}
+
+  	var setHorCount = function(){
+		countHor = $(".activeSlider>ul>li").length;
+  		$("#c-scroll-total-scrolls").val(countHor);
+	}
   
-  		setVerCount();
-  	
+  	setVerCount();
+  	setHorCount();
 	
-	$("#slider-button-down").click(function (){
+	$("#slider-button-up").click(function (){
 		console.log("Printing Down button");
+		var curIndex = $("#c-slider-cotainer > ul> li.activeSlider").index();
+		console.log(curIndex);
 
-		
-		$("#c-slider-cotainer > ul> li.activeSlider").prev().addClass("activeSlider animated slideInDown");
-		$("#c-slider-cotainer > ul li.activeSlider").next().removeClass("activeSlider animated slideInDown slideInUp");
-
+		// if(curIndex === 0){
+		// 	$("#c-slider-cotainer > ul>li:last-child").addClass("inactivePage");
+		// 	$("#c-slider-cotainer > ul>li:first-child").removeClass("inactivePage");
+		// }
+		// else{
+			$("#c-slider-cotainer > ul> li.activeSlider").prev().addClass("activeSlider animated slideInUp");
+			$("#c-slider-cotainer > ul li.activeSlider").next().removeClass("activeSlider animated slideInDown slideInUp");
+		//}
 		setVerCount();
 
 		var totalSliders = parseInt($("#c-slider-total-sliders").val());
@@ -115,14 +126,21 @@
 
 	
 	
-	$("#slider-button-up").click(function (){
+	$("#slider-button-down").click(function (){
 		console.log("Printing Up button");
+		var curIndex = $("#c-slider-cotainer > ul> li.activeSlider").index();
+		console.log(curIndex);
+		console.log(countVer-1);
 
-
-
-		$("#c-slider-cotainer > ul> li.activeSlider").next().addClass("activeSlider animated slideInUp");
-		$("#c-slider-cotainer > ul li.activeSlider").prev().removeClass("activeSlider animated slideInDown slideInUp");
-		$(".activeSlider>ul>li").first().addClass("activePage");
+		// if(curIndex === countVer-1){
+		// 	$("#c-slider-cotainer > ul>li:first-child").addClass("inactivePage");
+		// 	$("#c-slider-cotainer > ul>li:last-child").removeClass("inactivePage");
+		// }
+		//else{
+			$("#c-slider-cotainer > ul> li.activeSlider").next().addClass("activeSlider animated slideInDown");
+			$("#c-slider-cotainer > ul li.activeSlider").prev().removeClass("activeSlider animated slideInDown slideInUp");
+			$(".activeSlider>ul>li").first().addClass("activePage");
+		//}
 		setVerCount();
 
 		var totalSliders = parseInt($("#c-slider-total-sliders").val());
@@ -136,21 +154,26 @@
 		}
 	});
 
-	var setHorCount = function(){
-		var countHor = $(".activeSlider>ul>li").length;
-
-  		$("#c-scroll-total-scrolls").val(countHor);
-
-	}
+	
 
   	$("#slider-button-left").click(function(){
   		console.log("Printing Left button");
+  		var curIndex = $("li.activeSlider > ul > .activePage").index();
+		console.log(curIndex);
+		console.log(countHor-1);
 
-  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage animated fadeIn");
-  		$("li.activeSlider > ul > .activePage").next().removeClass("activePage animated fadeIn");
-  		$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
-  		$("li.activeSlider > ul > .activePage").next().addClass("animated slideOutLeft");
-  		
+		if(curIndex === 0){
+			$(".activeSlider>ul>li:last-child").addClass("activePage animated fadeIn");
+			$(".activeSlider>ul>li:first-child").removeClass("activePage animated fadeIn");
+			$(".activeSlider>ul>li:first-child").addClass("animated slideOutLeft");
+			$(".activeSlider>ul>li:last-child").removeClass("animated slideOutLeft");
+		}
+		else{
+	  		$("li.activeSlider > ul > .activePage").prev().addClass("activePage animated fadeIn");
+	  		$("li.activeSlider > ul > .activePage").next().removeClass("activePage animated fadeIn");
+	  		$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
+	  		$("li.activeSlider > ul > .activePage").next().addClass("animated slideOutLeft");
+  		}
 		
   		setHorCount();
   		
@@ -174,12 +197,22 @@
 
   	$("#slider-button-right").click(function (){
 		console.log("Printing right button");
+		var curIndex = $("li.activeSlider > ul > .activePage").index();
+		console.log(curIndex);
+		console.log(countHor-1);
 
-		$("li.activeSlider > ul > .activePage ").next().addClass("activePage animated fadeIn");
-		$("li.activeSlider > ul > .activePage").prev().removeClass("activePage animated fadeIn");
-		$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
-		$("li.activeSlider > ul > .activePage").prev().addClass("animated slideOutRight");
-		
+		if(curIndex === countHor-1){
+			$(".activeSlider>ul>li:last-child").removeClass("activePage animated fadeIn");
+			$(".activeSlider>ul>li:first-child").addClass("activePage animated fadeIn");
+			$(".activeSlider>ul>li:last-child").addClass("animated slideOutRight");
+			$(".activeSlider>ul>li:first-child").removeClass("animated slideOutRight");
+		}
+		else{
+			$("li.activeSlider > ul > .activePage ").next().addClass("activePage animated fadeIn");
+			$("li.activeSlider > ul > .activePage").prev().removeClass("activePage animated fadeIn");
+			$("li.activeSlider > ul > .activePage").removeClass("slideOutLeft slideOutRight");
+			$("li.activeSlider > ul > .activePage").prev().addClass("animated slideOutRight");
+		}
 		setHorCount();
 		
 
